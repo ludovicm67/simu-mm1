@@ -1,6 +1,6 @@
 #!/bin/sh
 
-RES_FILENAME="res.txt"
+RES_FILENAME="../data.txt"
 
 rm -f "$RES_FILENAME"
 
