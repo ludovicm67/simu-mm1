@@ -17,3 +17,7 @@ test:
 .PHONY: gen-data
 gen-data:
 	cd src/ && ../scripts/gen_data.sh
+
+.PHONY: gen-graph
+gen-graph:
+	./scripts/gen_graph.sh
