@@ -20,7 +20,7 @@ printBold "GÉNÉRATION DES GRAPHES"
 
 GRAPH_TITLE="Mesure du temps d'éxecution en fonction de la durée de simulation"
 echo " - génération du graphe «$GRAPH_TITLE»"
-img=graph/data/exec-duration.png
+img=graph/exec-duration.png
 
 gnuplot << EOF
 set grid
@@ -42,7 +42,7 @@ EOF
 
 GRAPH_TITLE="Comparaison de la valeur de «ro» en fonction de la durée de simulation"
 echo " - génération du graphe «$GRAPH_TITLE»"
-img=graph/data/ro.png
+img=graph/ro.png
 
 gnuplot << EOF
 set grid
