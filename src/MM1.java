@@ -1,6 +1,8 @@
 class MM1 {
 
-  // permet d'afficher la manière dont il faut utiliser le programme
+  /**
+   * Permet d'afficher la manière dont il faut utiliser le programme
+   */
   private static void printUsage() {
     System.err.println("UTILISATION : java MM1 lambda mu durée debug\n");
     System.err.println(" - lambda : \tparamètre pour la loi exponentielle pour les inter-arrivées");
@@ -10,6 +12,9 @@ class MM1 {
     System.exit(1);
   }
 
+  /**
+   * C'est là où tout commence !
+   */
   public static void main(String[] args) {
 
     // test du nombre d'arguments
@@ -21,13 +26,11 @@ class MM1 {
     double duree = Double.parseDouble(args[2]);
     boolean debug = args[3].equals("1");
 
+    // on lance l'échéancier
     (new Ech(lambda, mu, duree, debug)).run();
 
+    // on affiche les stats
     Stats stats = new Stats(lambda, mu, duree);
     stats.printResults();
-
-    // creer objet Ech , ajouter premier evt, laisser tourner
-
-    // lambda, mu, durée (à partir de laquelle on arrête de créer de nouveaux evts), debug (afficher evts si = 1)
   }
 }
