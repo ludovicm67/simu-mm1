@@ -21,3 +21,8 @@ gen-data:
 .PHONY: gen-graph
 gen-graph:
 	./scripts/gen_graph.sh
+
+.PHONY: clean
+clean:
+	rm -f ./src/*.class
+	rm -rf ./graph/
