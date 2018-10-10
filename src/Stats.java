@@ -9,7 +9,6 @@ class Stats {
   public static int clientId = 0;
   public static int nbNoWait = 0;
   public static int nbWait = 0;
-  public static int nbClientsBefore = 0;
   public static double lifeTime = 0;
 
   /**
@@ -74,7 +73,7 @@ class Stats {
     out += "Proportion clients sans attente = " + ((double)nbNoWait / (double)clientId) + "\n";
     out += "Proportion clients avec attente = " + ((double)nbWait / (double)clientId) + "\n";
     out += "Débit = " + (clientId / duree) + "\n";
-    out += "Nb moyen de clients dans systeme = " + ((double)nbClientsBefore / (double)clientId) + "\n";
+    out += "Nb moyen de clients dans systeme = " + (lifeTime / (double)duree) + "\n";
     out += "Temps moyen de sejour = " + (lifeTime / (double)clientId) + "\n";
 
     System.out.print(out);

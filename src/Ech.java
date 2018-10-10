@@ -67,10 +67,8 @@ class Ech {
   public void run() {
     addClient(); // ajout du premier client
 
-    double time;
+    double time, dateEvent;
     Evt e;
-
-    int nbBefore;
 
     // traitement de l'échéancier
     while (!list.isEmpty()) {
@@ -82,32 +80,27 @@ class Ech {
       // si c'est une arrivée
       if (e.isArrival()) {
 
+        dateEvent = e.getDate();
 
-        nbBefore = 0;
-        for (int i = 0; i < list.size(); i++) {
-          // s'il y a un départ avant, c'est qu'il y a déjà des clients dans la file
-          if (!list.get(i).isArrival()) {
-            nbBefore++;
-          }
-        }
-        if (nbBefore > 0) Stats.nbWait++; // ce client doit attendre
+        if (dateEvent < lastDeparture) Stats.nbWait++; // ce client doit attendre
         else Stats.nbNoWait++; // ce client n'a pas eu d'attente
 
-        Stats.nbClientsBefore += nbBefore; // ajout du nombre de client avant lui dans la file
-
         // on ajoute un nouveau client
-        time = e.getDate() + Utile.tirageExpo(lambda, Utile.tirageVa());
+        time = dateEvent + Utile.tirageExpo(lambda, Utile.tirageVa());
         if (duree >= time) {
           addClient(time);
         }
 
         // on prévoit le départ de notre client actuel
-        time = Math.max(e.getDate(), lastDeparture);
+        time = Math.max(dateEvent, lastDeparture);
         time += Utile.tirageExpo(mu, Utile.tirageVa());
         lastDeparture = time;
+        Stats.lifeTime += time - dateEvent;
 
-        Evt departure = new Evt(time, e.getClientId(), e.getBirthDate());
-        addEventToList(departure);
+        if (debug) {
+          Evt departure = new Evt(time, e.getClientId(), dateEvent);
+          addEventToList(departure);
+        }
       }
     }
   }

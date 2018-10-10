@@ -28,7 +28,6 @@ class Evt {
     this.date = date;
     this.birthDate = birthDate;
     this.clientId = clientId;
-    Stats.lifeTime += date - birthDate;
   }
 
   /**
@@ -64,13 +63,5 @@ class Evt {
    */
   public double getDate() {
     return date;
-  }
-
-  /**
-   * Retourne la date d'arrivée de l'évènement
-   * @return date d'arrivée de l'évènement
-   */
-  public double getBirthDate() {
-    return birthDate;
   }
 }
