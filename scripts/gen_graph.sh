@@ -40,7 +40,7 @@ replot
 EOF
 
 
-GRAPH_TITLE="Comparaison de la valeur de «ro» en fonction de la durée de simulation"
+GRAPH_TITLE="Comparaison de la valeur de «ro» (client avec attente) en fonction de la durée de simulation"
 echo " - génération du graphe «$GRAPH_TITLE»"
 img=graph/ro.png
 
@@ -57,6 +57,52 @@ set title "${GRAPH_TITLE}"
 plot \
     "${f}" using 1:7 with points linestyle 1 title "Résultat simulation",\
     "${f}" using 1:12 with linespoints lt 2 title "Résultat théorique"
+set terminal png
+set output "${img}"
+replot
+EOF
+
+
+GRAPH_TITLE="Probabilité de clients sans atente en fonction de la durée de simulation"
+echo " - génération du graphe «$GRAPH_TITLE»"
+img=graph/clients-wait.png
+
+gnuplot << EOF
+set grid
+set logscale x
+
+set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 pi -1 ps 1.5
+set pointintervalbox 3
+
+set xlabel "Durée de la simulation (paramètre)"
+set ylabel "Probabilité de clients sans atente"
+set title "${GRAPH_TITLE}"
+plot \
+    "${f}" using 1:6 with points linestyle 1 title "Résultat simulation",\
+    "${f}" using 1:14 with linespoints lt 2 title "Résultat théorique"
+set terminal png
+set output "${img}"
+replot
+EOF
+
+
+GRAPH_TITLE="Temps moyen de séjour en fonction de la durée de simulation"
+echo " - génération du graphe «$GRAPH_TITLE»"
+img=graph/time-mean.png
+
+gnuplot << EOF
+set grid
+set logscale x
+
+set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 pi -1 ps 1.5
+set pointintervalbox 3
+
+set xlabel "Durée de la simulation (paramètre)"
+set ylabel "Temps moyen de séjour"
+set title "${GRAPH_TITLE}"
+plot \
+    "${f}" using 1:10 with points linestyle 1 title "Résultat simulation",\
+    "${f}" using 1:16 with linespoints lt 2 title "Résultat théorique"
 set terminal png
 set output "${img}"
 replot

@@ -24,6 +24,7 @@ gen-graph:
 
 .PHONY: clean
 clean:
+	rm -rf ./dist/
 	rm -f ./src/*.class
 	rm -rf ./graph/
 	rm -f report.pdf
@@ -31,3 +32,10 @@ clean:
 .PHONY: report
 report:
 	./scripts/report.sh
+
+.PHONY: dist
+dist: clean gen-graph report
+	mkdir dist
+	cp src/*java dist
+	cp report.pdf dist
+	cd dist/ && tar -zcvf ../tp-muller-ludovic.tar.gz * && cd ..

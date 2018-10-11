@@ -2,3 +2,5 @@
 /graph/
 *.pdf
 texput.*
+/dist/
+*.tar.gz
