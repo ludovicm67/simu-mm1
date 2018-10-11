@@ -12,7 +12,8 @@ echo " - durée moyenne par éxécution : $SIMU_AWG_EXEC secondes"
 echo " - nombre d'éxécutions au total : $(cat data.txt | wc -l)"
 
 mkdir -p graph/data
-awk '{if ($2 == 5) if ($3 == 6) print $0}' data.txt > graph/data/x-5-6.txt
+awk '{if ($2 == 5) if ($3 == 6) print $0}' data.txt \
+  | sort -n > graph/data/x-5-6.txt
 
 f=graph/data/x-5-6.txt
 
@@ -40,7 +41,7 @@ replot
 EOF
 
 
-GRAPH_TITLE="Comparaison de la valeur de «ro» (client avec attente) en fonction de la durée de simulation"
+GRAPH_TITLE="Comparaison de la valeur de «ro» (=client avec attente) en fct de la durée de simu"
 echo " - génération du graphe «$GRAPH_TITLE»"
 img=graph/ro.png
 
@@ -63,7 +64,7 @@ replot
 EOF
 
 
-GRAPH_TITLE="Probabilité de clients sans atente en fonction de la durée de simulation"
+GRAPH_TITLE="Probabilité de clients sans attente en fonction de la durée de simulation"
 echo " - génération du graphe «$GRAPH_TITLE»"
 img=graph/clients-wait.png
 
@@ -75,7 +76,7 @@ set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 pi -1 ps 1.5
 set pointintervalbox 3
 
 set xlabel "Durée de la simulation (paramètre)"
-set ylabel "Probabilité de clients sans atente"
+set ylabel "Probabilité de clients sans attente"
 set title "${GRAPH_TITLE}"
 plot \
     "${f}" using 1:6 with points linestyle 1 title "Résultat simulation",\

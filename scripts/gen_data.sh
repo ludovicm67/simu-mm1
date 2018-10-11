@@ -2,7 +2,7 @@
 
 RES_FILENAME="../data.txt"
 
-rm -f "$RES_FILENAME"
+# rm -f "$RES_FILENAME"
 
 # $1=lambda : paramètre pour la loi exponentielle pour les inter-arrivées
 # $2=mu : paramètre pour la loi exponentielle pour les durées de service
@@ -33,9 +33,10 @@ fetchResults() {
   NBMCS=$(echo "$CONTENT" | awk '/Nb moyen de clients dans systeme/{print $NF;}')
   TMDS=$(echo "$CONTENT" | awk '/Temps moyen de sejour =/{print $NF;}')
 
-  echo "$3 $1 $2 $UTIME $NBTC $PCSA $PCAA $DEBIT $NBMCS $TMDS $STABLE $RO $NBCA $PSSA $ESPNBC $TMS" >> "$RES_FILENAME" 
+  echo "$3 $1 $2 $UTIME $NBTC $PCSA $PCAA $DEBIT $NBMCS $TMDS $STABLE $RO $NBCA $PSSA $ESPNBC $TMS" >> "$RES_FILENAME"
 }
 
+# on génère plein de data; par contre c'est très long !
 for t in 10 100 1000 10000 100000 1000000 10000000 100000000; do
   for l in 2 5 15 30; do
     for m in 3 6 25; do
@@ -46,6 +47,14 @@ for t in 10 100 1000 10000 100000 1000000 10000000 100000000; do
         done
       fi
     done
+  done
+done
+
+# on complète le jeu de données avec des données plus ciblées
+for t in 10 100 1000 10000 100000 1000000 10000000; do
+  # lance 100 fois pour avoir un échantillon varié
+  for i in `seq 100`; do
+    fetchResults 5 6 "$t"
   done
 done
 
