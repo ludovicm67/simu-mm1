@@ -26,7 +26,7 @@ gnuplot << EOF
 set grid
 set logscale x
 
-set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 pi -1 ps 1.5
+set style line 1 lc rgb '#0060ad' lt 1 lw 1 pt 7 pi -1 ps 1.5
 set pointintervalbox 3
 
 set xlabel "Durée de la simulation (paramètre)"
@@ -47,12 +47,16 @@ img=graph/ro.png
 gnuplot << EOF
 set grid
 set logscale x
+
+set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 pi -1 ps 1.5
+set pointintervalbox 3
+
 set xlabel "Durée de la simulation (paramètre)"
 set ylabel "Valeur de «ro»"
 set title "${GRAPH_TITLE}"
 plot \
-    "${f}" using 1:7 with linespoints lt 1 title "Résultat simulation" smooth bezier,\
-    "${f}" using 1:12 with linespoints lt 2 title "Résultat théorique" smooth bezier
+    "${f}" using 1:7 with points linestyle 1 title "Résultat simulation",\
+    "${f}" using 1:12 with linespoints lt 2 title "Résultat théorique"
 set terminal png
 set output "${img}"
 replot

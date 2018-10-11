@@ -26,3 +26,8 @@ gen-graph:
 clean:
 	rm -f ./src/*.class
 	rm -rf ./graph/
+	rm -f report.pdf
+
+.PHONY: report
+report:
+	./scripts/report.sh
