@@ -28,6 +28,7 @@ clean:
 	rm -f ./src/*.class
 	rm -rf ./graph/
 	rm -f report.pdf
+	rm -r tp-muller-ludovic.tar.gz
 
 .PHONY: report
 report:
